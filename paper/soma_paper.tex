@@ -68,7 +68,7 @@ To our knowledge, this is the first application of self-supervised transformers 
 Hidden Markov Models (HMMs) have been applied to cortical culture data to identify discrete network states \citep{beggs2003neuronal}, and similar approaches exist for \textit{in vivo} neural recordings. These methods require explicit state models and assumptions about state dynamics. More recently, variational autoencoders and other generative models have been applied to neural population data, but not to organoid MEA recordings.
 
 \paragraph{Self-supervised learning for neural signals.}
-BENDR \citep{kostas2021bendr} applied contrastive self-supervised learning to scalp EEG, demonstrating that SSL representations outperform hand-crafted features for downstream classification. \citet{dong2024brainjepa} introduced Brain-JEPA for fMRI, using JEPA training on BOLD signals at NeurIPS 2024. NeuroGPT \citep{cui2024neurogpt} applied autoregressive pretraining to intracranial EEG. Critically, none of these works address MEA recordings or brain organoids---our work fills this gap.
+BENDR \citep{kostas2021bendr} applied contrastive self-supervised learning to scalp EEG, demonstrating that SSL representations outperform hand-crafted features for downstream classification. \citet{dong2024brainjepa} introduced Brain-JEPA for fMRI, using JEPA training on BOLD signals at NeurIPS 2024. NeuroGPT \citep{cui2024neurogpt} applied masked prediction pretrinting to scalp EEG. Critically, none of these works address MEA recordings or brain organoids---our work fills this gap.
 
 \paragraph{JEPA architectures.}
 The Joint Embedding Predictive Architecture (JEPA) family \citep{assran2023ijepa, bardes2024vjepa} learns representations by predicting target embeddings from context, avoiding pixel-level reconstruction. We adapt this framework to 2D spike matrices (channels $\times$ time bins), treating MEA recordings as ``images'' of neural activity.
@@ -424,7 +424,7 @@ Assran, M., Duval, Q., Misra, I., Bojanowski, P., Vincent, P., Rabbat, M., LeCun
 \bibitem[Bardes et~al.(2024)]{bardes2024vjepa}
 Bardes, A., Garrido, Q., Ponce, J., Chen, X., Rabbat, M., LeCun, Y., Assran, M., and Ballas, N.
 \newblock V-JEPA: Latent video prediction for visual representation learning.
-\newblock \emph{arXiv preprint arXiv:2404.16930}, 2024.
+\newblock \emph{arXiv preprint arXiv:2404.08471}, 2024.
 
 \bibitem[Beggs and Plenz(2003)]{beggs2003neuronal}
 Beggs, J.~M. and Plenz, D.
@@ -484,3 +484,4 @@ Zbontar, J., Jing, L., Misra, I., LeCun, Y., and Deny, S.
 \end{thebibliography}
 
 \end{document}
+
