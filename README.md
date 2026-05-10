@@ -119,4 +119,4 @@ MIT — see [LICENSE](LICENSE).
 
 ## Acknowledgments
 
-FinalSpark team (Fred Jordan, Martin Kutter, Alain Nogaret, Flora Brozzi, Yosser Nouar) for Neuroplatform access and data.
+FinalSpark team (Fred Jordan, Martin Kutter, Jean-Marc Comby, Flora Brozzi, Dr. Ewelina Kurtys) for Neuroplatform access and data.
