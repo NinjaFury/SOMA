@@ -92,6 +92,45 @@ states = km.fit_predict(embeddings)
 print(f"Silhouette: {silhouette_score(embeddings, states):.3f}")
 ```
 
+## Vedanā Gate (Experimental)
+
+SOMA v0.2 introduces the **Vedanā Gate** — a mandatory valence-scoring layer inserted between patch embedding and the transformer encoder. Inspired by the Buddhist concept of vedanā (feeling-tone), each patch is independently scored before any cross-patch interaction occurs.
+
+```
+Patches (B, N, D)
+    ↓
+VedanāGate: Linear → GELU → Linear → σ → per-patch score ∈ [0,1]
+    ↓
+gated = patches * scores
+    ↓
+Transformer Blocks → JEPA
+```
+
+The gate adds 0.4% parameters and learns end-to-end from the JEPA loss — no separate supervision.
+
+### Run A/B experiment
+
+```bash
+python scripts/run_vedana_experiment.py --data path/to/spikes.csv
+```
+
+### Python API
+
+```python
+from soma import VedanaBrainJEPA, train_vedana_jepa
+
+model, embeddings = train_vedana_jepa(
+    data=signals,
+    n_epochs=50,
+    embed_dim=256,
+    depth=6,
+    device="cuda",
+)
+
+# Inspect what the gate learned
+gate_scores = model.get_gate_scores(batch_x)  # (B, N) per-patch scores
+```
+
 ## Data
 
 This work uses spike data from the [FinalSpark](https://finalspark.com/) Neuroplatform — a cloud-accessible platform for biological neural network experiments. The dataset contains MEA recordings from organoid cultures across multiple days.
