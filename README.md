@@ -32,7 +32,7 @@ Embeddings → KMeans Clustering → Network States
 ## Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/SOMA.git
+git clone https://github.com/NinjaFury/SOMA.git
 cd SOMA
 pip install -r requirements.txt
 ```
