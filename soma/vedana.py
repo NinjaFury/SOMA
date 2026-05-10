@@ -68,7 +68,7 @@ class VedanaGate(nn.Module):
 
 
 class VedanaBrainJEPA(BrainJEPA):
-    """SOMA with Vedanā Gate — valence-scored self-supervised learning.
+    """SOMA with Vedana Gate — valence-scored self-supervised learning.
 
     Identical to BrainJEPA except:
     1. A VedanaGate is applied to context patches after masking
@@ -86,7 +86,7 @@ class VedanaBrainJEPA(BrainJEPA):
         self.vedana_gate = VedanaGate(self.embed_dim, reduction=gate_reduction)
 
     def train_step(self, x: torch.Tensor) -> dict[str, torch.Tensor]:
-        """Training step with vedanā gating on context path.
+        """Training step with vedana gating on context path.
 
         Gate is applied after patch selection (masking), before transformer.
         Target path remains ungated — the asymmetry is the learning signal.
@@ -109,7 +109,7 @@ class VedanaBrainJEPA(BrainJEPA):
             ctx_patches, 1,
             ctx_idx.unsqueeze(-1).expand(-1, -1, self.embed_dim))
 
-        # --- Vedanā Gate ---
+        # --- Vedana Gate ---
         ctx_emb, gate_scores = self.vedana_gate(ctx_emb)
 
         for blk in self.context_encoder.blocks:
@@ -161,7 +161,7 @@ class VedanaBrainJEPA(BrainJEPA):
 
     @torch.no_grad()
     def get_gate_scores(self, x: torch.Tensor) -> np.ndarray:
-        """Get vedanā scores for all patches. (B, N) numpy array."""
+        """Get vedana scores for all patches. (B, N) numpy array."""
         patches = (self.context_encoder.patch_embed(x)
                    + self.context_encoder.pos_embed)
         _, scores = self.vedana_gate(patches)
@@ -182,7 +182,7 @@ def train_vedana_jepa(
     device: str | None = None,
     checkpoint_dir: str | None = None,
 ) -> tuple[VedanaBrainJEPA, np.ndarray]:
-    """Train Vedanā-gated SOMA and return model + embeddings.
+    """Train Vedana-gated SOMA and return model + embeddings.
 
     Mirrors train_brain_jepa() with VedanaBrainJEPA + gate logging.
     """
@@ -191,7 +191,7 @@ def train_vedana_jepa(
 
     N = data.shape[0]
     n_frames = data.shape[2]
-    _log(f"Training Vedanā-SOMA: {N} windows of "
+    _log(f"Training Vedana-SOMA: {N} windows of "
          f"[{data.shape[1]}x{n_frames}] on {device}")
 
     # Auto patch_size

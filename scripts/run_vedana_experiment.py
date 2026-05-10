@@ -60,8 +60,8 @@ def run(args):
     np.random.seed(seed)
 
     print("=" * 60)
-    print("  Vedanā Gate A/B Experiment")
-    print("  Baseline SOMA  vs  Vedanā-gated SOMA")
+    print("  Vedana Gate A/B Experiment")
+    print("  Baseline SOMA  vs  Vedana-gated SOMA")
     print("=" * 60)
 
     # Load data once
@@ -106,9 +106,9 @@ def run(args):
           f"sil={baseline_results['best_silhouette']:.4f}, "
           f"sr_corr={sr_corr:.3f}")
 
-    # --- B: Vedanā-gated SOMA ---
+    # --- B: Vedana-gated SOMA ---
     print("\n" + "=" * 60)
-    print("  B: Vedanā-gated SOMA")
+    print("  B: Vedana-gated SOMA")
     print("=" * 60)
 
     torch.manual_seed(seed)
@@ -149,7 +149,7 @@ def run(args):
     vedana_results["gate_sparsity"] = float((gate_scores_all < 0.5).mean())
     vedana_results["gate_per_patch_mean"] = gate_scores_all.mean(axis=0).tolist()
 
-    print(f"\n  Vedanā: k={vedana_results['optimal_k']}, "
+    print(f"\n  Vedana: k={vedana_results['optimal_k']}, "
           f"sil={vedana_results['best_silhouette']:.4f}, "
           f"sr_corr={sr_corr_v:.3f}")
     print(f"  Gate: mean={vedana_results['gate_mean']:.3f}, "
@@ -163,13 +163,13 @@ def run(args):
     print("  COMPARISON")
     print("=" * 60)
     print(f"  Silhouette:  baseline={baseline_results['best_silhouette']:.4f}"
-          f"  vedanā={vedana_results['best_silhouette']:.4f}"
+          f"  vedana={vedana_results['best_silhouette']:.4f}"
           f"  delta={sil_delta:+.4f}")
     print(f"  Optimal k:   baseline={baseline_results['optimal_k']}"
-          f"  vedanā={vedana_results['optimal_k']}")
+          f"  vedana={vedana_results['optimal_k']}")
     print(f"  SR corr:     baseline={baseline_results['spike_rate_corr']:.3f}"
-          f"  vedanā={vedana_results['spike_rate_corr']:.3f}")
-    print(f"  Time:        baseline={t_a:.1f}s  vedanā={t_b:.1f}s")
+          f"  vedana={vedana_results['spike_rate_corr']:.3f}")
+    print(f"  Time:        baseline={t_a:.1f}s  vedana={t_b:.1f}s")
 
     verdict = "IMPROVED" if sil_delta > 0.01 else (
         "DEGRADED" if sil_delta < -0.01 else "NEUTRAL")
@@ -208,7 +208,7 @@ def run(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Vedanā Gate A/B: gated vs ungated SOMA")
+        description="Vedana Gate A/B: gated vs ungated SOMA")
     parser.add_argument("--data", required=True, help="Path to spike CSV")
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--embed-dim", type=int, default=256)
